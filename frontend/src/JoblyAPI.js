@@ -1,34 +1,40 @@
-import axios from 'axios';
+import axios from "axios";
+import { TOKEN_STORAGE_ID } from "./App.js"
 
 const BASE_URL = process.env.BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
   static async request(endpoint, params = {}, verb = "get") {
 
-    let _token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc" +
-    "3RpbmciLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU1MzcwMzE1M30." +
-    "COmFETEsTxN_VfIlgIKw0bYJLkvbRQNgO1XCSE8NZ0U"
+    let _token = localStorage.getItem(TOKEN_STORAGE_ID);
 
     console.debug("API Call:", endpoint, params, verb);
 
-    let searchQuery;
+    let q;
+
     if (verb === "get") {
-      searchQuery = axios.get(
-        `${BASE_URL}/${endpoint}`, { params: { _token, ...params } }
-      )
+      q = axios.get(
+        `${BASE_URL}/${endpoint}`, { params: { _token, ...params } });
+    } else if (verb === "post") {
+      q = axios.post(
+        `${BASE_URL}/${endpoint}`, { _token, ...params });
+    } else if (verb === "patch") {
+      q = axios.patch(
+        `${BASE_URL}/${endpoint}`, { _token, ...params });
     }
 
     try {
-      return (await searchQuery).data;
-        // axios sends query string data via the "params" key,
-        // and request body data via the "data" key,
-        // so the key we need depends on the HTTP verb
-    }
-    catch(err) {
+      return (await q).data;
+    } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.message;
       throw Array.isArray(message) ? message : [message];
     }
+  }
+
+  static async getCompanies(search) {
+    let res = await this.request("companies", { search });
+    return res.companies;
   }
 
   static async getCompany(handle) {
@@ -36,10 +42,35 @@ class JoblyApi {
     return res.company;
   }
 
-  static async getCompanies(handle) {
-    let res = await this.request(`companies`, { handle })
-    return res.companies
+  static async getJobs(search) {
+    let res = await this.request("jobs", { search });
+    return res.jobs;
+  }
+
+  static async applyToJob(id) {
+    let res = await this.request(`jobs/${id}/apply`, {}, "post");
+    return res.message;
+  }
+
+  static async login(data) {
+    let res = await this.request(`login`, data, "post");
+    return res.token;
+  }
+
+  static async register(data) {
+    let res = await this.request(`users`, data, "post");
+    return res.token;
+  }
+
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  static async saveProfile(username, data) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
   }
 }
 
-export default JoblyApi
+export default JoblyApi;

@@ -2,8 +2,7 @@ import React from "react";
 import Card from "./Card";
 
 const CardList = ({ cards }) => {
-  console.log(cards)
-  return cards.length > 0
+  return cards.length
     ? (
     <div>
       {cards.map((card, idx) => (

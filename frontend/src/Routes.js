@@ -2,30 +2,30 @@ import React from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 import Home from './Home'
 import Companies from './Companies'
+import Company from './Company'
 import Jobs from './Jobs'
 import Profile from './Profile'
-import CompanyCard from './CompanyCard'
 import Form from './Form'
 
-function Routes() {
+function Routes({ setToken }) {
   return (
     <Switch>
       <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/companies'>
+      <Route exact path='/companies'>
         <Companies />
       </Route>
-      <Route path='/companies/:id'>
-        <CompanyCard />
+      <Route exact path='/companies/:handle'>
+        <Company />
       </Route>
-      <Route path='/jobs'>
+      <Route exact path='/jobs'>
         <Jobs />
       </Route>
-      <Route path='/login'>
-        <Form />
+      <Route exact path='/login'>
+        <Form setToken={setToken} />
       </Route>
-      <Route path='/profile'>
+      <Route exact path='/profile'>
         <Profile />
       </Route>
       <Redirect to='/' />

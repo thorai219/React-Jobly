@@ -1,15 +1,43 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import UserContext from './UserContext'
 
-export function NavBar() {
+function NavBar({ logout }) {
+  const { currentUser } = useContext(UserContext)
+  
+  function loggedInNavbar() {
+    return (
+      <ul className="navlinks flex-row">
+        <li className="nav-item">
+          <NavLink to='/companies'>Companies</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to='/jobs'>Jobs</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to='/profile'>Profile</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink to='/' onClick={logout}>Logout</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
+  function loggedOutNavbar() {
+    return (
+      <ul className="navlinks flex-row">
+        <li className="nav-item">
+          <NavLink to="/login">Login</NavLink>
+        </li>
+      </ul>
+    )
+  }
+
   return (
-    <nav>
-      <NavLink exact to='/'>Home</NavLink>
-      <NavLink exact to='/companies'>Companies</NavLink>
-      <NavLink exact to='/companies/:id'>Company</NavLink>
-      <NavLink exact to='/jobs'>Jobs</NavLink>
-      <NavLink exact to='/profile'>Profile</NavLink>
-      <NavLink exact to='/login'>Login</NavLink>
+    <nav className="navbar flex-row">
+      <NavLink className="logo" to='/'>Jobly</NavLink>
+      {currentUser ? loggedInNavbar() : loggedOutNavbar()}
     </nav>
   )
 }

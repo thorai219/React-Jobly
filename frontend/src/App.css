@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #faf8ff;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex-end {
+  float: right;
+  margin: 15px !important;
+}
+
+.no-text-deco {
+  text-decoration: none;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.center {
+  margin-top: 30vh;
+}
+
+.logo {
+  padding: 15px;
+}
+
+.navbar {
+  width: 100%;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #ffffff;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.navlinks {
+  list-style: none;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.logo {
+  font-size: 22px;
+  padding: 11px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgba(40, 40, 40, 0.7);
+}
+
+.nav-item {
+  margin-right: 27px;
+  font-size: 17px;
+  padding: 10px;
+}
+
+.nav-item a {
+  color: rgba(40, 40, 40, 0.7);
+  text-decoration: none;
+}
+
+.form {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.toggle-btn {
+  width: 50%;
+  height: 30px;
+  font-size: 16px;
+  color:rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border: 1px solid rgba(0, 177, 106, 0.6);
+  background-color: #ffffff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.highlight {
+  background-color: rgba(0, 177, 106, 0.5);
+}
+
+.form-group {
+  margin: 15px;
+}
+
+.form-group label {
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  height: 25px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.submit-btn {
+  height: 30px;
+  border-radius: 5px;
+  margin: 15px;
+  font-size: 16px;
+  color:rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 177, 106, 0.6);
+  background-color: rgba(0, 177, 106, 0.5);
+}
+
+.welcome {
+  font-size: 25px;
+  color:rgba(0, 0, 0, 0.5);
+  font-weight: 300;
+}
