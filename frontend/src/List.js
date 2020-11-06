@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
 
-const CardList = ({ cards }) => {
+const CardList = ({ cards = [], apply = () => null }) => {
   return cards.length
     ? (
     <div>
@@ -9,6 +9,8 @@ const CardList = ({ cards }) => {
         <Card 
           item={card}
           key={idx}
+          idx={idx}
+          apply={apply}
         />
       ))}
     </div> )

@@ -4,7 +4,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-function JobCard({ job }) {
+function JobCard({ job = {}, handleApply }) {
+  console.log(job.state)
   return (
     <Card style={{marginBottom: 15, padding: 5}}>
       <CardContent>
@@ -23,9 +24,11 @@ function JobCard({ job }) {
         variant="contained" 
         color="secondary"
         style={{fontWeight: "bold"}}
+        onClick={handleApply}
+        disabled={job.state}
         className="flex-end"
       >
-      Apply
+      {job.state ? "Applied" : "Apply"}
       </Button>
     </Card>
   )

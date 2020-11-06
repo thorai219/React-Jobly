@@ -20,10 +20,18 @@ const Jobs = () => {
     setJobs(jobs)
   }
 
+  async function apply(idx) {
+    let jobId = jobs[idx].id
+    let msg = await JoblyApi.applyToJob(jobId)
+    setJobs(j => j.map(job => 
+      job.id === jobId ? { ...job, state: msg } : job
+    ))
+  }
+
   return (
     <Box component="div" margin="40px auto" width="1200px">
       <Search endpoint="/companies" search={handleSearch}/>
-      <List cards={jobs} />
+      <List cards={jobs} apply={apply} />
     </Box>
   )
 }
