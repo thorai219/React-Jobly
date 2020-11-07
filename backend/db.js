@@ -1,15 +1,14 @@
 /** Database setup for jobly. */
+
+
 const { Client } = require("pg");
 const { DB_URI } = require("./config");
 
-const db = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: DB_URI,
-  password: '1234',
-  port: 5432
-})
+const client = new Client({
+  connectionString: DB_URI
+});
 
-db.connect();
+client.connect();
 
-module.exports = db;
+
+module.exports = client;
